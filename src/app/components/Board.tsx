@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Square from './Square';
 
 function Board(): JSX.Element {
-  function renderSquare(i: number) {
-    return <Square />;
+  const [nextPlayer, setNextPlayer] = useState('X');
+  const [squares, setSquares] = useState(Array(9).fill(null));
+
+  function handleClick(id) {
+    const newSquares = [...squares];
+    newSquares[id] = nextPlayer;
+    setNextPlayer((prev) => (prev === 'X' ? 'O' : 'X'));
+    setSquares(newSquares);
   }
 
-  const status = 'Next player: X';
+  function renderSquare(i: number) {
+    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+  }
+
+  const status = `Next player: ${nextPlayer}`;
 
   return (
     <div>

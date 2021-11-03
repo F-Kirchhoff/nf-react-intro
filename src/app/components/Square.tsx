@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Square(): JSX.Element {
-  return <button className="square">{/* TODO */}</button>;
+function Square(props): JSX.Element {
+  return (
+    <button className="square" onClick={() => !props.value && props.onClick()}>
+      {props.value}
+    </button>
+  );
 }
 
 export default Square;
